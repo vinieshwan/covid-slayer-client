@@ -31,7 +31,7 @@ const Signup = () => {
 			setStyle({ error: 'red' });
 		} else {
 			axios
-				.post('https://covid-slayer-server.herokuapp.com/v1/signup', {
+				.post('/v1/signup', {
 					name: inputs.name,
 					email: inputs.email,
 					password: inputs.password,

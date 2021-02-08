@@ -3,14 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-import {
-	TextField,
-	IconButton,
-	Avatar,
-	Button,
-	Typography,
-	Box
-} from '@material-ui/core/';
+import { TextField, Button, Typography, Box } from '@material-ui/core/';
 
 import { playGameRequest, endGameRequest } from './../actions';
 
