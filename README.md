@@ -13,7 +13,6 @@ Install dependencies by:\
 ### `npm i`
 
 Run by:\
-You will also see any lint errors in the console.
 
 ### `npm start`
 
