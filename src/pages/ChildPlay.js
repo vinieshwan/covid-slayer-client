@@ -45,7 +45,6 @@ const ChildPlay = (props) => {
 	};
 
 	const handleLose = () => {
-		console.log(commentary, typeof commentary);
 		dispatch(
 			endGameRequest({
 				lost: true,

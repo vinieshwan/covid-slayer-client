@@ -31,7 +31,7 @@ const Signup = () => {
 			setStyle({ error: 'red' });
 		} else {
 			axios
-				.post('/v1/signup', {
+				.post('https://covid-slayer-server.herokuapp.com/v1/signup', {
 					name: inputs.name,
 					email: inputs.email,
 					password: inputs.password,
@@ -44,8 +44,7 @@ const Signup = () => {
 					}
 				})
 				.catch((error) => {
-					alert('Invalid fields');
-					console.log(error);
+					alert('Invalid fields', error.message);
 				});
 		}
 	};
