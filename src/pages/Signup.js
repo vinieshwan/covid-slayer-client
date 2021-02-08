@@ -45,6 +45,7 @@ const Signup = () => {
 				})
 				.catch((error) => {
 					alert('Invalid fields');
+					console.log(error);
 				});
 		}
 	};
