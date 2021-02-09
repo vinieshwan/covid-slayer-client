@@ -36,7 +36,7 @@ const Account = () => {
 				history.push('/dashboard');
 			})
 			.catch((error) => {
-				alert(error.message);
+				alert(error.response);
 			});
 	};
 
@@ -46,7 +46,7 @@ const Account = () => {
 				setUser(response.data.data.user);
 			})
 			.catch((error) => {
-				console.log(error.message);
+				alert(error.response);
 			});
 	}, []);
 

@@ -26,11 +26,11 @@ const Signup = () => {
 
 	const history = useHistory();
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (!inputs.avatar) {
 			setStyle({ error: 'red' });
 		} else {
-			userSignupService({
+			await userSignupService({
 				name: inputs.name,
 				email: inputs.email,
 				password: inputs.password,
