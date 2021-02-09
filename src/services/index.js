@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_PATH = 'https://covid-slayer-server.herokuapp.com';
+const API_PATH = 'http://localhost:4000';
 
 export const userLoginService = async (email, password) => {
 	try {
@@ -29,6 +29,17 @@ export const verifyTokenService = async () => {
 export const userLogoutService = async () => {
 	try {
 		return await axios.post(`${API_PATH}/v1/logout`);
+	} catch (err) {
+		return {
+			error: true,
+			response: err.response
+		};
+	}
+};
+
+export const userSignupService = async (user) => {
+	try {
+		return await axios.post(`${API_PATH}/v1/signup`, user);
 	} catch (err) {
 		return {
 			error: true,

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import {
 	TextField,
 	IconButton,
@@ -8,6 +7,7 @@ import {
 	Button,
 	Typography
 } from '@material-ui/core/';
+import { userSignupService } from './../services';
 
 const Signup = () => {
 	const [inputs, setInputs] = useState({
@@ -30,13 +30,12 @@ const Signup = () => {
 		if (!inputs.avatar) {
 			setStyle({ error: 'red' });
 		} else {
-			axios
-				.post('https://covid-slayer-server.herokuapp.com/v1/signup', {
-					name: inputs.name,
-					email: inputs.email,
-					password: inputs.password,
-					avatar: inputs.avatar
-				})
+			userSignupService({
+				name: inputs.name,
+				email: inputs.email,
+				password: inputs.password,
+				avatar: inputs.avatar
+			})
 				.then(function (response) {
 					if (response.data.data.ok) {
 						alert('Please proceed to login');
@@ -44,7 +43,7 @@ const Signup = () => {
 					}
 				})
 				.catch((error) => {
-					alert('Invalid fields', error.message);
+					alert(error);
 				});
 		}
 	};

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
 	Avatar,
 	Typography,
@@ -14,7 +14,6 @@ import { getUser, updateUser } from './../services';
 
 const Account = () => {
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const authObj = useSelector((state) => state.auth);
 
 	const { avatar } = authObj;
@@ -31,19 +30,24 @@ const Account = () => {
 	const [user, setUser] = useState({});
 
 	const handleSubmit = async () => {
-		const response = await updateUser(inputs);
-
-		if (response.error) {
-			alert('Something went wrong!');
-		} else {
-			alert('Successfully updated!');
-			history.push('/dashboard');
-		}
+		updateUser(inputs)
+			.then((response) => {
+				alert('Successfully updated!');
+				history.push('/dashboard');
+			})
+			.catch((error) => {
+				alert(error.message);
+			});
 	};
 
-	useEffect(async () => {
-		const userHolder = await getUser();
-		setUser(userHolder.data.data.user);
+	useEffect(() => {
+		getUser()
+			.then((response) => {
+				setUser(response.data.data.user);
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
 	}, []);
 
 	return (

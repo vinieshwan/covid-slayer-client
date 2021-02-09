@@ -10,7 +10,7 @@ const Play = () => {
 
 	useEffect(() => {
 		dispatch(playGameRequest());
-	}, [gameInfo]);
+	}, []);
 
 	return (
 		<div>

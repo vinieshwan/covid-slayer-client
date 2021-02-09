@@ -12,7 +12,7 @@ const Game = () => {
 	const dispatch = useDispatch();
 	const authObj = useSelector((state) => state.auth);
 
-	const { playerName, gamesPlayed, wins, losses, gameTime, avatar } = authObj;
+	const { playerName, gamesPlayed, wins, losses, gameTime } = authObj;
 
 	const [inputs, setInputs] = useState({});
 
@@ -29,7 +29,7 @@ const Game = () => {
 
 	useEffect(() => {
 		dispatch(playGameRequest());
-	}, [authObj]);
+	}, []);
 	return (
 		<div style={{ width: '100%' }}>
 			<Box display="flex" p={1}>
