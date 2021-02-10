@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_PATH = 'http://localhost:4000';
+const API_PATH = '';
 
 export const userLoginService = async (email, password) => {
 	try {
