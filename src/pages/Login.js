@@ -70,7 +70,7 @@ function Login() {
 				>
 					{userLoginLoading ? 'Loading...' : 'Login'}
 				</Button>
-				{loginError ? 'Account does not exist' : ''}
+				{loginError ? loginError : ''}
 			</form>
 		</div>
 	);
