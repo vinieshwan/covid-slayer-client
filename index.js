@@ -7,10 +7,11 @@ const app = express();
 app.use(express.static(`${__dirname}/build`));
 
 app.use(
-	'/v1',
+	'/v1/*',
 	createProxyMiddleware({
-		target: 'https://covid-slayer-server.herokuapp.com',
-		changeOrigin: true
+		target: process.env.TARGET,
+		changeOrigin: true,
+		secure: false
 	})
 );
 
