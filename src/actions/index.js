@@ -21,14 +21,14 @@ import {
 
 export const userLogin = ({ email, password }) => async (dispatch) => {
 	dispatch(userLoginStarted());
-	await userLoginService(email, password)
-		.then((result) => {
-			dispatch(verifyUserSuccess(result.data.data.session));
-		})
-		.catch((error) => {
-			dispatch(userLoginFailure(error.response));
-			return;
-		});
+	const result = await userLoginService(email, password);
+
+	if (result.error) {
+		dispatch(userLoginFailure(result.message));
+		return;
+	}
+
+	dispatch(verifyUserSuccess(result.data.data.session));
 };
 
 export const userLogoutRequest = () => (dispatch) => {
@@ -39,38 +39,37 @@ export const userLogoutRequest = () => (dispatch) => {
 export const verifyToken = (silentAuth = false) => async (dispatch) => {
 	dispatch(verifyTokenStarted(silentAuth));
 
-	verifyTokenService()
-		.then((result) => {
-			dispatch(verifyUserSuccess(result.data.data.session));
-		})
-		.catch((error) => {
-			dispatch(verifyTokenEnd());
-			if (error.response && [401, 403].includes(error.response.status))
-				dispatch(userLogout());
-			return;
-		});
+	const result = await verifyTokenService();
+
+	if (result.error) {
+		dispatch(verifyTokenEnd());
+		if (result.response && [401, 403].includes(result.response.status))
+			dispatch(userLogout());
+		return;
+	}
+
+	if (result.status === 204) dispatch(verifyTokenEnd());
+
+	dispatch(verifyUserSuccess(result.data.data.session));
 };
 
 export const playGameRequest = () => async (dispatch) => {
-	playGameService()
-		.then((result) => {
-			dispatch(playGameSuccess(result.data.data.settings));
-		})
-		.catch((error) => {
-			dispatch(playGameFailure(error.response));
-			return;
-		});
+	const result = await playGameService();
+	if (result.error) {
+		dispatch(playGameFailure(result.message));
+		return;
+	}
+	dispatch(playGameSuccess(result.data.data.settings));
 };
 
 export const endGameRequest = (update) => async (dispatch) => {
-	gameSettings(update)
-		.then((result) => {
-			dispatch(endGameSuccess(result.data.data.settings));
-		})
-		.catch((error) => {
-			dispatch(endGameFailure(error.response));
-			return;
-		});
+	const result = await gameSettings(update);
+
+	if (result.error) {
+		dispatch(endGameFailure(result.message));
+		return;
+	}
+	dispatch(endGameSuccess(result.data.data.settings));
 };
 
 export const userLoginStarted = () => {

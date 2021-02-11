@@ -29,25 +29,29 @@ const Account = () => {
 	const [style, setStyle] = useState(initialStyle);
 	const [user, setUser] = useState({});
 
-	const handleSubmit = async () => {
-		updateUser(inputs)
-			.then((response) => {
-				alert('Successfully updated!');
-				history.push('/dashboard');
-			})
-			.catch((error) => {
-				alert(error.response);
-			});
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		const result = await updateUser(inputs);
+
+		if (result.error) {
+			alert(result.message);
+			return;
+		}
+
+		alert('Successfully updated!');
+		history.push('/dashboard');
 	};
 
-	useEffect(() => {
-		getUser()
-			.then((response) => {
-				setUser(response.data.data.user);
-			})
-			.catch((error) => {
-				alert(error.response);
-			});
+	useEffect(async () => {
+		const result = await getUser();
+
+		if (result.error) {
+			alert(result.message);
+
+			return;
+		}
+		setUser(result.data.data.user);
 	}, []);
 
 	return (

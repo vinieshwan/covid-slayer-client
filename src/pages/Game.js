@@ -16,7 +16,9 @@ const Game = () => {
 
 	const [inputs, setInputs] = useState({});
 
-	const handleSubmit = () => {
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
 		const inputsHolder = inputs;
 
 		if (inputs.gameTime) {

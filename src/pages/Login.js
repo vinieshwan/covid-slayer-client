@@ -16,7 +16,9 @@ function Login() {
 
 	const { userLoginLoading, loginError } = authObj;
 
-	const handleLogin = () => {
+	const handleLogin = (event) => {
+		event.preventDefault();
+
 		dispatch(userLogin(inputs));
 	};
 

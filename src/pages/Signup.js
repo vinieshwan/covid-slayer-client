@@ -26,25 +26,29 @@ const Signup = () => {
 
 	const history = useHistory();
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
 		if (!inputs.avatar) {
 			setStyle({ error: 'red' });
 		} else {
-			await userSignupService({
+			const result = await userSignupService({
 				name: inputs.name,
 				email: inputs.email,
 				password: inputs.password,
 				avatar: inputs.avatar
-			})
-				.then(function (response) {
-					if (response.data.data.ok) {
-						alert('Please proceed to login');
-						history.push('/login');
-					}
-				})
-				.catch((error) => {
-					alert(error);
-				});
+			});
+
+			if (result.error) {
+				alert(result.message);
+
+				return;
+			}
+
+			if (result.data.data.ok) {
+				alert('Please proceed to login');
+				history.push('/login');
+			}
 		}
 	};
 
@@ -52,7 +56,7 @@ const Signup = () => {
 		<div>
 			<Typography variant="h2">Signup</Typography>
 			<br />
-			<form onSubmi={handleSubmit}>
+			<form onSubmit={handleSubmit}>
 				<TextField
 					label="Name"
 					variant="outlined"

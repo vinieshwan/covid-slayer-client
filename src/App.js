@@ -37,14 +37,10 @@ const App = () => {
 				<div>
 					<div className="content">
 						<Switch>
+							<PublicRoute path="/signup" component={Signup} />
 							<PublicRoute
 								path="/login"
 								component={Login}
-								isAuthenticated={isAuthenticated}
-							/>
-							<PublicRoute
-								path="/signup"
-								component={Signup}
 								isAuthenticated={isAuthenticated}
 							/>
 							<PrivateRoute

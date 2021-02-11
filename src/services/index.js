@@ -10,7 +10,8 @@ export const userLoginService = async (email, password) => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -21,7 +22,8 @@ export const verifyTokenService = async () => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -32,7 +34,8 @@ export const userLogoutService = async () => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -43,7 +46,8 @@ export const userSignupService = async (user) => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -54,7 +58,8 @@ export const playGameService = async () => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -65,7 +70,8 @@ export const gameSettings = async (update) => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -80,7 +86,8 @@ export const downloadGameLog = async (game) => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -91,7 +98,8 @@ export const getUser = async () => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };
@@ -102,7 +110,8 @@ export const updateUser = async (update) => {
 	} catch (err) {
 		return {
 			error: true,
-			response: err.response
+			response: err.response,
+			message: err.response.data.message
 		};
 	}
 };

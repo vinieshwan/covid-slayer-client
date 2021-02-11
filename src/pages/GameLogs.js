@@ -22,14 +22,14 @@ const GameLogs = () => {
 	const gameInfo = useSelector((state) => state.auth);
 	const [commentary, setCommentary] = useState('');
 
-	const handleDownload = (id) => {
-		downloadGameLog(id)
-			.then((result) => {
-				setCommentary(result.data);
-			})
-			.catch((error) => {
-				alert(error.response);
-			});
+	const handleDownload = async (id) => {
+		const result = await downloadGameLog(id);
+		if (result.error) {
+			alert(result.message);
+			return;
+		}
+
+		setCommentary(result.data);
 	};
 
 	useEffect(() => {
