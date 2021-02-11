@@ -42,12 +42,11 @@ const Game = () => {
 					</NavLink>
 				</Box>
 			</Box>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<TextField
 					label={`Player Name: ${playerName}`}
 					variant="outlined"
 					type="text"
-					required
 					value={inputs.playerName ? inputs.playerName : ''}
 					error={inputs.playerName && inputs.playerName.trim() === ''}
 					helperText={
@@ -64,7 +63,6 @@ const Game = () => {
 					label={`Game Time: ${gameTime}`}
 					variant="outlined"
 					type="text"
-					required
 					value={inputs.gameTime ? inputs.gameTime : ''}
 					error={inputs.gameTime && inputs.gameTime.trim() === ''}
 					helperText={
@@ -100,7 +98,7 @@ const Game = () => {
 				/>
 				<br />
 				<br />
-				<Button variant="contained" onClick={handleSubmit} color="primary">
+				<Button type="submit" variant="contained" color="primary">
 					Submit
 				</Button>
 			</form>

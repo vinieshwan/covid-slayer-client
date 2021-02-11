@@ -52,7 +52,7 @@ const Signup = () => {
 		<div>
 			<Typography variant="h2">Signup</Typography>
 			<br />
-			<form>
+			<form onSubmi={handleSubmit}>
 				<TextField
 					label="Name"
 					variant="outlined"
@@ -182,7 +182,7 @@ const Signup = () => {
 					/>
 				</IconButton>
 				<br />
-				<Button variant="contained" onClick={handleSubmit} color="primary">
+				<Button type="submit" variant="contained" color="primary">
 					Submit
 				</Button>
 			</form>

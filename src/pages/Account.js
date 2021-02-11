@@ -62,12 +62,11 @@ const Account = () => {
 					</NavLink>
 				</Box>
 			</Box>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<TextField
 					label={`Name: ${user.name}`}
 					variant="outlined"
 					type="text"
-					required
 					value={inputs.name ? inputs.name : ''}
 					error={inputs.name && inputs.name.trim() === ''}
 					helperText={inputs.name && inputs.name.trim() === '' ? 'Empty!' : ' '}
@@ -80,7 +79,6 @@ const Account = () => {
 					label={`Email: ${user.email}`}
 					variant="outlined"
 					type="email"
-					required
 					value={inputs.email ? inputs.email : ''}
 					error={inputs.email && inputs.email.trim() === ''}
 					helperText={
@@ -96,7 +94,6 @@ const Account = () => {
 					label={`Password: ***`}
 					variant="outlined"
 					type="email"
-					required
 					value={inputs.password ? inputs.password : ''}
 					error={inputs.password && inputs.password.trim() === ''}
 					helperText={
@@ -189,7 +186,7 @@ const Account = () => {
 					/>
 				</IconButton>
 				<br />
-				<Button variant="contained" onClick={handleSubmit} color="primary">
+				<Button type="submit" variant="contained" color="primary">
 					Submit
 				</Button>
 			</form>

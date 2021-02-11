@@ -24,7 +24,7 @@ function Login() {
 		<div>
 			<Typography variant="h2">Login</Typography>
 			<br />
-			<form>
+			<form onSubmit={handleLogin}>
 				<TextField
 					label="Email"
 					variant="outlined"
@@ -63,9 +63,9 @@ function Login() {
 				<br />
 				<br />
 				<Button
+					type="submit"
 					disabled={userLoginLoading}
 					variant="contained"
-					onClick={handleLogin}
 					color="primary"
 				>
 					{userLoginLoading ? 'Loading...' : 'Login'}
