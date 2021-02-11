@@ -130,7 +130,7 @@ const ChildPlay = (props) => {
 				setTimer(timer - 1);
 			}
 		}, 1000);
-	}, []);
+	}, [timer]);
 
 	return (
 		<div>
