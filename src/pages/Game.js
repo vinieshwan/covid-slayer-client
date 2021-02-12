@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 
 import { TextField, Button, Typography, Box } from '@material-ui/core/';
 
@@ -38,11 +37,6 @@ const Game = () => {
 				<Box p={2} flexGrow={1}>
 					<Typography variant="h3">Game Settings</Typography>
 				</Box>
-				<Box p={2}>
-					<NavLink component={Button} to="/dashboard">
-						Dashboardd
-					</NavLink>
-				</Box>
 			</Box>
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -75,32 +69,10 @@ const Game = () => {
 						setInputs({ ...inputs, gameTime: e.target.value });
 					}}
 				/>
-				<br />
-				<TextField
-					label={`Wins: ${wins}`}
-					variant="outlined"
-					type="text"
-					disabled
-				/>
+
 				<br />
 				<br />
-				<TextField
-					label={`Losses: ${losses}`}
-					variant="outlined"
-					type="text"
-					disabled
-				/>
-				<br />
-				<br />
-				<TextField
-					label={`Games played: ${gamesPlayed}`}
-					variant="outlined"
-					type="text"
-					disabled
-				/>
-				<br />
-				<br />
-				<Button type="submit" variant="contained" color="primary">
+				<Button type="submit" variant="contained" color="secondary">
 					Submit
 				</Button>
 			</form>

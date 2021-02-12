@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CloudDownload from '@material-ui/icons/CloudDownload';
+import HighlightIcon from '@material-ui/icons/Highlight';
+import CloseIcon from '@material-ui/icons/Close';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
 import {
 	Typography,
@@ -44,9 +47,6 @@ const GameLogs = () => {
 		for (let i = 1; i <= gamesPlayed; i++) {
 			logs.push(
 				<ListItem button onClick={handleDownload.bind(this, i)}>
-					<ListItemIcon>
-						<CloudDownload />
-					</ListItemIcon>
 					<ListItemText primary={`Game ${i}`} />
 				</ListItem>
 			);
@@ -57,7 +57,84 @@ const GameLogs = () => {
 
 	return (
 		<div>
-			<Box display="flex" p={1}>
+			<Box p={1}>
+				<Box
+					p={2}
+					style={{
+						height: '50px',
+						width: '100%',
+						borderTopRightRadius: '5px',
+						borderTopLeftRadius: '5px',
+						padding: '10px',
+						backgroundColor: '#283347'
+					}}
+					display="flex"
+				>
+					<Box flexGrow={1}>
+						<Typography variant="h6">Game logs</Typography>
+					</Box>
+					<Box px={2}>
+						<HighlightIcon style={{ color: '#FFD000' }} />
+						{gameInfo.wins} wins
+					</Box>
+					<Box px={2}>
+						<CloseIcon style={{ color: '#EC274F' }} />
+						{gameInfo.losses} losses
+					</Box>
+					<Box px={2}>
+						<SportsEsportsIcon style={{ color: '#37DD4A' }} />
+						{gameInfo.gamesPlayed} games played
+					</Box>
+				</Box>
+				<Box
+					p={2}
+					style={{
+						height: '68vh',
+						width: '100%',
+						borderBottomRightRadius: '5px',
+						borderBottomLeftRadius: '5px',
+						padding: '0px',
+						backgroundColor: '#1D2738'
+					}}
+					display="flex"
+				>
+					<Box flexGrow={1} style={{ overflow: 'auto' }}>
+						<List component="nav">{logs(gameInfo.gamesPlayed)}</List>
+					</Box>
+					<Box
+						p={1}
+						style={{
+							borderTop: '1px solid #131B29',
+							width: '30vh',
+							backgroundColor: '#283346',
+							textAlign: 'center'
+						}}
+					>
+						<Box
+							style={{
+								paddingBottom: '4px'
+							}}
+						>
+							<Typography variant="caption">Commentary</Typography>
+						</Box>
+						<Box>
+							<TextareaAutosize
+								value={commentary}
+								rows={27}
+								rowsMax={27}
+								style={{
+									textAlign: 'center',
+									width: '100%',
+									color: '#fff',
+									backgroundColor: '#2f3746',
+									borderRadius: '5px'
+								}}
+							/>
+						</Box>
+					</Box>
+				</Box>
+			</Box>
+			{/* <Box display="flex" p={1}>
 				<Box p={2} flexGrow={1}>
 					<Typography variant="h3">Game Logs</Typography>
 				</Box>
@@ -81,7 +158,7 @@ const GameLogs = () => {
 						style={{ width: '100%' }}
 					/>
 				</Box>
-			</Box>
+			</Box> */}
 		</div>
 	);
 };

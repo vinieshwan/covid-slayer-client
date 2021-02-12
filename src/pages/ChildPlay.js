@@ -6,8 +6,12 @@ import {
 	Typography,
 	Box,
 	Button,
+	Slider,
 	TextareaAutosize
 } from '@material-ui/core/';
+import HighlightIcon from '@material-ui/icons/Highlight';
+import CloseIcon from '@material-ui/icons/Close';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
 import { endGameRequest } from './../actions';
 
@@ -25,7 +29,7 @@ const ChildPlay = (props) => {
 
 	const handleGiveUp = () => {
 		if (window.confirm('Are you sure you want to quit?')) {
-			handleLose();
+			handleLose('\nYou gave up!');
 		}
 	};
 
@@ -44,11 +48,11 @@ const ChildPlay = (props) => {
 		history.push('/dashboard');
 	};
 
-	const handleLose = () => {
+	const handleLose = (commentaryHandle = '') => {
 		dispatch(
 			endGameRequest({
 				lost: true,
-				commentary: commentary ? commentary : ''
+				commentary: commentaryHandle ? commentaryHandle : commentary
 			})
 		);
 		alert('You lose');
@@ -134,98 +138,205 @@ const ChildPlay = (props) => {
 
 	return (
 		<div>
-			<Box display="flex" p={1}>
-				<Box p={2}>
-					<Typography variant="h6">
-						Total Games Played: {gameInfo.gamesPlayed}
-					</Typography>
+			<Box p={1}>
+				<Box
+					p={2}
+					style={{
+						height: '50px',
+						width: '100%',
+						borderTopRightRadius: '5px',
+						borderTopLeftRadius: '5px',
+						padding: '10px',
+						backgroundColor: '#283347'
+					}}
+					display="flex"
+				>
+					<Box flexGrow={1}>
+						<Typography variant="h6">{gameInfo.playerName} vs Covid</Typography>
+					</Box>
+					<Box px={2}>
+						<HighlightIcon style={{ color: '#FFD000' }} />
+						{gameInfo.wins} wins
+					</Box>
+					<Box px={2}>
+						<CloseIcon style={{ color: '#EC274F' }} />
+						{gameInfo.losses} losses
+					</Box>
+					<Box px={2}>
+						<SportsEsportsIcon style={{ color: '#37DD4A' }} />
+						{gameInfo.gamesPlayed} games played
+					</Box>
 				</Box>
-				<Box p={2}>
-					<Typography variant="h6">Total Wins: {gameInfo.wins}</Typography>
-				</Box>
-				<Box p={2}>
-					<Typography variant="h6">Total Losses: {gameInfo.losses}</Typography>
+				<Box
+					p={2}
+					style={{
+						height: '80%',
+						width: '100%',
+						borderBottomRightRadius: '5px',
+						borderBottomLeftRadius: '5px',
+						padding: '0px',
+						backgroundColor: '#1D2738'
+					}}
+					display="flex"
+				>
+					<Box flexGrow={1}>
+						<Box p={1} display="flex" textAlign="center">
+							<Box p={2} style={{ width: '100%' }}>
+								<Box>
+									<Typography variant="h5">{gameInfo.playerName}</Typography>
+								</Box>
+								<Box display="flex" alignSelf="center" justifyContent="center">
+									<Avatar
+										variant="rounded"
+										src={`/images/${gameInfo.avatar}.jpg`}
+										style={{
+											margin: '10px',
+											width: '160px',
+											height: '160px'
+										}}
+									/>
+								</Box>
+								<Box>
+									<Slider
+										style={{ width: '60%', color: '#37dd4a' }}
+										defaultValue={life.you}
+										disabled
+										getAriaValueText={() => {
+											return `${life.you} %`;
+										}}
+										valueLabelDisplay="on"
+										marks={[
+											{ value: 0, label: '0%' },
+											{ value: 100, label: '100 %' }
+										]}
+										value={life.you}
+									/>
+								</Box>
+							</Box>
+							<Box p={2} style={{ width: '100%' }}>
+								<Box>
+									<Typography variant="h5">Covid</Typography>
+								</Box>
+								<Box display="flex" alignSelf="center" justifyContent="center">
+									<Avatar
+										variant="rounded"
+										src={`/images/virus.jpg`}
+										style={{
+											margin: '10px',
+											width: '160px',
+											height: '160px'
+										}}
+									/>
+								</Box>
+								<Box>
+									<Slider
+										style={{ width: '60%', color: '#37dd4a' }}
+										defaultValue={life.enemy}
+										disabled
+										getAriaValueText={() => {
+											return `${life.enemy} %`;
+										}}
+										valueLabelDisplay="on"
+										marks={[
+											{ value: 0, label: '0%' },
+											{ value: 100, label: '100 %' }
+										]}
+										value={life.enemy}
+									/>
+								</Box>
+							</Box>
+						</Box>
+
+						<Box
+							display="flex"
+							alignSelf="center"
+							justifyContent="center"
+							p={1}
+						>
+							<Box p={2}>
+								<Button
+									variant="contained"
+									onClick={handleAttack}
+									style={{ backgroundColor: '#0085fb', color: '#fff' }}
+								>
+									Attack
+								</Button>
+							</Box>
+							<Box p={2}>
+								<Button
+									variant="contained"
+									style={{ backgroundColor: '#de00c3', color: '#fff' }}
+									onClick={handleBlast}
+								>
+									Blast
+								</Button>
+							</Box>
+							<Box p={2}>
+								<Button
+									variant="contained"
+									style={{ backgroundColor: '#04d004', color: '#fff' }}
+									onClick={handleHeal}
+								>
+									Heal
+								</Button>
+							</Box>
+							<Box p={2}>
+								<Button
+									variant="contained"
+									style={{ backgroundColor: '#ff0404', color: '#fff' }}
+									onClick={handleGiveUp}
+								>
+									Give up
+								</Button>
+							</Box>
+						</Box>
+					</Box>
+					<Box
+						p={1}
+						style={{
+							borderTop: '1px solid #131B29',
+							height: '60vh',
+							width: '30vh',
+							backgroundColor: '#283346',
+							textAlign: 'center'
+						}}
+					>
+						<Box>
+							<Typography variant="h6">
+								Timer:{' '}
+								<span
+									style={{
+										color: '#d8113a'
+									}}
+								>
+									{timer}s
+								</span>
+							</Typography>
+						</Box>
+						<Box
+							style={{
+								paddingBottom: '4px'
+							}}
+						>
+							<Typography variant="caption">Commentary</Typography>
+						</Box>
+						<Box>
+							<TextareaAutosize
+								value={commentary}
+								rows={21}
+								rowsMax={21}
+								style={{
+									textAlign: 'center',
+									width: '100%',
+									color: '#fff',
+									backgroundColor: '#2f3746',
+									borderRadius: '5px'
+								}}
+							/>
+						</Box>
+					</Box>
 				</Box>
 			</Box>
-			<Box display="flex" p={1}>
-				<Box p={2} flexGrow={1}>
-					<Box display="flex" p={1}>
-						<Box p={2} flexGrow={1}>
-							<Avatar
-								src={`/images/${gameInfo.avatar}.jpg`}
-								style={{
-									margin: '10px',
-									width: '60px',
-									height: '60px'
-								}}
-							/>
-							<Typography variant="h3"> {gameInfo.playerName}</Typography>
-							<Typography variant="h6"> {life.you}%</Typography>
-						</Box>
-						<Box p={2} flexGrow={1}>
-							<Avatar
-								src={`/images/virus.jpg`}
-								style={{
-									margin: '10px',
-									width: '60px',
-									height: '60px'
-								}}
-							/>
-							<Typography variant="h3">Covid</Typography>
-							<Typography variant="h6"> {life.enemy}%</Typography>
-						</Box>
-					</Box>
-					<Box display="flex" p={1}>
-						<Box p={2}>
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={handleAttack}
-							>
-								Attack
-							</Button>
-						</Box>
-						<Box p={2}>
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={handleBlast}
-							>
-								Blast
-							</Button>
-						</Box>
-						<Box p={2}>
-							<Button
-								variant="contained"
-								style={{ backgroundColor: '#04d004', color: '#fff' }}
-								onClick={handleHeal}
-							>
-								Heal
-							</Button>
-						</Box>
-						<Box p={2}>
-							<Button
-								variant="contained"
-								style={{ backgroundColor: 'red', color: '#fff' }}
-								onClick={handleGiveUp}
-							>
-								Give up
-							</Button>
-						</Box>
-					</Box>
-				</Box>
-				<Box p={2}>
-					<Typography variant="h3" color="error">
-						Timer: {timer}s
-					</Typography>
-					<Typography variant="caption">Game commentary:</Typography>
-					<TextareaAutosize
-						value={commentary}
-						rows={20}
-						style={{ width: '100%' }}
-					/>
-				</Box>
-			</Box>{' '}
 		</div>
 	);
 };

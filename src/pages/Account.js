@@ -8,7 +8,6 @@ import {
 	IconButton,
 	TextField
 } from '@material-ui/core/';
-import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { getUser, updateUser } from './../services';
 
@@ -59,11 +58,6 @@ const Account = () => {
 			<Box display="flex" p={1}>
 				<Box p={2} flexGrow={1}>
 					<Typography variant="h3">Account Settings</Typography>
-				</Box>
-				<Box p={2}>
-					<NavLink component={Button} to="/dashboard">
-						Dashboardd
-					</NavLink>
 				</Box>
 			</Box>
 			<form onSubmit={handleSubmit}>
@@ -190,7 +184,7 @@ const Account = () => {
 					/>
 				</IconButton>
 				<br />
-				<Button type="submit" variant="contained" color="primary">
+				<Button type="submit" variant="contained" color="secondary">
 					Submit
 				</Button>
 			</form>

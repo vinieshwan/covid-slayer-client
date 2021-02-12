@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import {
 	TextField,
 	IconButton,
 	Avatar,
 	Button,
-	Typography
+	Typography,
+	Box
 } from '@material-ui/core/';
 import { userSignupService } from './../services';
 
@@ -54,7 +56,45 @@ const Signup = () => {
 
 	return (
 		<div>
-			<Typography variant="h2">Signup</Typography>
+			<Box display="flex">
+				<Box>
+					<NavLink to="/login">
+						<Typography
+							variant="h6"
+							style={{
+								fontFamily: ['Noto Sans SC', 'sans-serif'],
+								fontWeight: '900'
+							}}
+						>
+							Login
+						</Typography>
+					</NavLink>
+				</Box>
+				<Box px={2}>
+					<Typography
+						variant="h6"
+						style={{
+							fontFamily: ['Noto Sans SC', 'sans-serif'],
+							fontWeight: '900'
+						}}
+					>
+						|
+					</Typography>
+				</Box>
+				<Box>
+					<NavLink activeClassName="activeLink" to="/">
+						<Typography
+							variant="h6"
+							style={{
+								fontFamily: ['Noto Sans SC', 'sans-serif'],
+								fontWeight: '900'
+							}}
+						>
+							Signup
+						</Typography>
+					</NavLink>
+				</Box>
+			</Box>
 			<br />
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -115,7 +155,7 @@ const Signup = () => {
 						setInputs({ ...inputs, avatar: 'archer' });
 						setStyle({
 							...initialStyle,
-							archer: '#0000000a'
+							archer: '#d8113a'
 						});
 					}}
 				>
@@ -134,7 +174,7 @@ const Signup = () => {
 						setInputs({ ...inputs, avatar: 'witch' });
 						setStyle({
 							...initialStyle,
-							witch: '#0000000a'
+							witch: '#d8113a'
 						});
 					}}
 				>
@@ -153,7 +193,7 @@ const Signup = () => {
 						setInputs({ ...inputs, avatar: 'boxer' });
 						setStyle({
 							...initialStyle,
-							boxer: '#0000000a'
+							boxer: '#d8113a'
 						});
 					}}
 				>
@@ -172,7 +212,7 @@ const Signup = () => {
 						setInputs({ ...inputs, avatar: 'ninja' });
 						setStyle({
 							...initialStyle,
-							ninja: '#0000000a'
+							ninja: '#d8113a'
 						});
 					}}
 				>
@@ -186,7 +226,8 @@ const Signup = () => {
 					/>
 				</IconButton>
 				<br />
-				<Button type="submit" variant="contained" color="primary">
+				<br />
+				<Button type="submit" variant="contained" color="secondary">
 					Submit
 				</Button>
 			</form>
